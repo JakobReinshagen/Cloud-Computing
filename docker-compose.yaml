@@ -5,10 +5,24 @@ services:
     image: node:18-alpine
     command: sh -c "yarn install && yarn run dev"
     ports:
-      - 127.0.0.1:3000:3000
+      - 80:3000
     working_dir: /app
     volumes:
       - ./:/app
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_DB: todos
+
+  readonly:
+    image: node:18-alpine
+    command: sh -c "yarn install && yarn run dev"
+    ports:
+      - 81:3000
+    working_dir: /app
+    volumes:
+      - ../gettingStartedReadOnly/CloudComputing:/app
     environment:
       MYSQL_HOST: mysql
       MYSQL_USER: root
