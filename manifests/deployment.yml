@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: jakobreinshagencloudcomputing 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jakobreinshagencloudcomputing
+  template:
+    metadata:
+      labels:
+        app: jakobreinshagencloudcomputing 
+    spec:
+      containers:
+        - name: jakobreinshagencloudcomputing 
+          image: cloudcomputingreg.azurecr.io/jakobreinshagencloudcomputing
+          ports:
+          - containerPort: 3000
