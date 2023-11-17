@@ -184,7 +184,9 @@ function ItemDisplay({ item, onItemUpdate, onItemRemoval }) {
                             onChange={(e) => setUpdatedName(e.target.value)}
                         />
                     ) : (
-                        item.name
+                        <div className={item.completed ? 'completed-text' : ''}>
+                            {item.name}
+                        </div>
                     )}
                 </Col>
                 <Col xs={1} className="text-center">
