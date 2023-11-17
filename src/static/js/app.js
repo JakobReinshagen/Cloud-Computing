@@ -116,7 +116,9 @@ function AddItemForm({ onNewItem }) {
 }
 
 function ItemDisplay({ item, onItemUpdate, onItemRemoval }) {
-    const { Container, Row, Col, Button } = ReactBootstrap;
+    const { Container, Row, Col, Button, Form } = ReactBootstrap;
+    const [isEditing, setEditing] = React.useState(false);
+    const [updatedName, setUpdatedName] = React.useState(item.name);
 
     const toggleCompletion = () => {
         fetch(`/items/${item.id}`, {
@@ -127,14 +129,27 @@ function ItemDisplay({ item, onItemUpdate, onItemRemoval }) {
             }),
             headers: { 'Content-Type': 'application/json' },
         })
-            .then(r => r.json())
+            .then((res) => res.json())
             .then(onItemUpdate);
     };
 
     const removeItem = () => {
         fetch(`/items/${item.id}`, { method: 'DELETE' }).then(() =>
-            onItemRemoval(item),
+            onItemRemoval(item)
         );
+    };
+
+    const handleUpdate = () => {
+        fetch(`/items/${item.id}`, {
+            method: 'PUT',
+            body: JSON.stringify({ name: updatedName, completed: item.completed }),
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then((res) => res.json())
+            .then((updatedItem) => {
+                setEditing(false);
+                onItemUpdate(updatedItem);
+            });
     };
 
     return (
@@ -154,13 +169,38 @@ function ItemDisplay({ item, onItemUpdate, onItemRemoval }) {
                     >
                         <i
                             className={`far ${
-                                item.completed ? 'fa-check-square' : 'fa-square'
+                                item.completed
+                                    ? 'fa-check-square'
+                                    : 'fa-square'
                             }`}
                         />
                     </Button>
                 </Col>
-                <Col xs={10} className="name">
-                    {item.name}
+                <Col xs={8} className="name">
+                    {isEditing ? (
+                        <Form.Control
+                            type="text"
+                            value={updatedName}
+                            onChange={(e) => setUpdatedName(e.target.value)}
+                        />
+                    ) : (
+                        item.name
+                    )}
+                </Col>
+                <Col xs={1} className="text-center">
+                    {isEditing ? (
+                        <Button size="sm" variant="link" onClick={handleUpdate}>
+                            <i className="fas fa-check text-success" />
+                        </Button>
+                    ) : (
+                        <Button
+                            size="sm"
+                            variant="link"
+                            onClick={() => setEditing(true)}
+                        >
+                            <i className="fas fa-edit text-warning" />
+                        </Button>
+                    )}
                 </Col>
                 <Col xs={1} className="text-center remove">
                     <Button
@@ -176,5 +216,4 @@ function ItemDisplay({ item, onItemUpdate, onItemRemoval }) {
         </Container>
     );
 }
-
 ReactDOM.render(<App />, document.getElementById('root'));
