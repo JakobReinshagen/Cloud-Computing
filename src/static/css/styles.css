@@ -49,25 +49,41 @@ button:focus {
     padding: 10px 0;
 }
 
-.completed-text {
-    position: relative;
-    display: inline-block;
-}
+$height: 16px;
+$halfheight: ($height/2);
+$thickness: 110%; 
+$offset: 4px;
+$backgroundcolor: #F7F2E2;
+$linecolor: #F7A9B9;
 
 .completed-text:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: repeating-linear-gradient(
-        -45deg,
-        transparent,
-        transparent 5px,
-        #000 5px,
-        #000 10px
-    );
-    transform: translateY(-50%);
-}
+	margin: 7.5% 0;
+	background: $backgroundcolor;
+	position: relative;
+	height: $height;
+	z-index: 1;
+	&:before,
+	&:after {
+		content: "";
+		display: block;
+		position: absolute;
+		left: 0;
+  		right: 0;
+	}
+	&:before {
+		height: ($height - $offset);
+		top: $thickness;
+		background: linear-gradient(-135deg, $linecolor $halfheight, transparent 0) 0 $halfheight, linear-gradient( 135deg, $linecolor $halfheight, transparent 0) 0 $halfheight;
+		background-position: top left;
+		background-repeat: repeat-x;
+		background-size: $height $height;
+	}
+	&:after {
+		height: $height;
+		top: 100%;
+		background: linear-gradient(-135deg, $backgroundcolor $halfheight, transparent 0) 0 $halfheight, linear-gradient( 135deg, $backgroundcolor $halfheight, transparent 0) 0 $halfheight;
+		background-position: top left;
+		background-repeat: repeat-x;
+		background-size: $height $height;
+	}
 
