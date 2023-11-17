@@ -38,7 +38,7 @@ body {
 button:focus {
     border: 1px solid #333;
 }
-       /* Add some CSS to style the footer */
+
 .footer {
     position: fixed;
     bottom: 0;
@@ -47,23 +47,6 @@ button:focus {
     color: white;
     text-align: center;
     padding: 10px 0;
-}
-.completed-text {
-    position: relative;
-    display: inline-block;
-    text-decoration: line-through;
-    color: transparent;
-}
-
-.completed-text:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(-45deg, #F7A9B9 5px, transparent 0) repeat-x;
-    transform: translateY(-50%);
 }
 
 .completed-text {
