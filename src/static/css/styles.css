@@ -51,36 +51,17 @@ button:focus {
 .completed-text {
     position: relative;
     display: inline-block;
+    text-decoration: line-through;
+    color: transparent;
 }
 
 .completed-text:after {
-    margin: 7.5% 0;
-    background: #F7F2E2; /* Replace with your background color */
-    position: relative;
-    height: 16px; /* Replace with your height */
-    z-index: 1;
-    &:before,
-    &:after {
-        content: "";
-        display: block;
-        position: absolute;
-        left: 0;
-        right: 0;
-    }
-    &:before {
-        height: 12px; /* Replace with your ($height - $offset) value */
-        top: 110%; /* Replace with your $thickness value */
-        background: linear-gradient(-135deg, #F7A9B9 8px, transparent 0) 0 8px, linear-gradient( 135deg, #F7A9B9 8px, transparent 0) 0 8px;
-        background-position: top left;
-        background-repeat: repeat-x;
-        background-size: 16px 16px; /* Replace with your $height value */
-    }
-    &:after {
-        height: 16px; /* Replace with your $height value */
-        top: 100%;
-        background: linear-gradient(-135deg, #F7F2E2 8px, transparent 0) 0 8px, linear-gradient( 135deg, #F7F2E2 8px, transparent 0) 0 8px;
-        background-position: top left;
-        background-repeat: repeat-x;
-        background-size: 16px 16px; /* Replace with your $height value */
-    }
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(-45deg, #F7A9B9 5px, transparent 0) repeat-x;
+    transform: translateY(-50%);
 }
