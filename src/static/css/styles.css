@@ -56,6 +56,11 @@ $offset: 4px;
 $backgroundcolor: #F7F2E2;
 $linecolor: #F7A9B9;
 
+.completed-text {
+    position: relative;
+    display: inline-block;
+}
+
 .completed-text:after {
 	margin: 7.5% 0;
 	background: $backgroundcolor;
